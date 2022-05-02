@@ -31,4 +31,20 @@ summarize_demo <- demo_table2 %>% group_by(condition) %>% summarize(Mean_Mileage
 # group_by() & summarize with multiple columns
 summarize_demo <- demo_table2 %>% group_by(condition) %>% summarize(Mean_Mileage=mean(odometer),Maximum_Price=max(price),Num_Vehicles=n(), .groups='keep')
 
+# reshape (gather vs spread)
 demo_table3 <- read.csv(file='demo2.csv', check.names=F,stringsAsFactors=F)
+long_table <- gather(demo_table3,key="Metric",value="Score",buying_price:popularity)
+long_table <- demo_table3 %>% gather(key='Metric',value='Score',buying_price:popularity)
+wide_table <- long_table %>% spread(key='Metric',value='Score')
+wide_table <- wide_table[,(colnames(demo_table3))] # reorganize columns to match demo_table3
+all.equal(demo_table3,wide_table)
+
+# ggplot2 - using mpg data which is built into R
+plt <- ggplot(mpg,aes(x=class)) #import dataset into ggplot2
+plt + geom_bar() #plot a bar 
+
+mpg_summary <- mpg %>% group_by(manufacturer) %>% summarize(Vehicle_Count=n(), .groups='keep')
+plt <- ggplot(mpg_summary, aes(x=manufacturer, y=Vehicle_Count))
+plt+geom_col()+xlab("Manufacturing Company")+ylab("Number of Vehicles in Dataset")+
+  theme(axis.text.x=element_text(angle=45,hjust=1)) #rotate x-axis labels by 45 degrees
+
