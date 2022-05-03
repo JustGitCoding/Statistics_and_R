@@ -116,3 +116,23 @@ mtcars_filt <- mtcars[,c('hp','cyl')] #filter columns from data
 mtcars_filt$cyl <- factor(mtcars_filt$cyl) #convert numeric column to factor
 aov(hp ~ cyl, data=mtcars_filt) #compare means across multiple levels
 summary(aov(hp ~ cyl, data=mtcars_filt)) #summarize results of aov (Pr(>F) is our p-value)
+
+#correlation
+head(mtcars)
+plt <- ggplot(mtcars, aes(x=hp, y=qsec))
+plt + geom_point()
+cor(mtcars$hp,mtcars$qsec) #correlation coefficient (r)
+
+#another example
+usedcar_table <- read.csv('used_car_data.csv',stringsAsFactors = F)
+head(usedcar_table)
+plt <- ggplot(usedcar_table,aes(x=Miles_Driven,y=Selling_Price))
+plt + geom_point()
+cor(usedcar_table$Miles_Driven, usedcar_table$Selling_Price)
+
+#correlation matrix
+usedcar_matrix <- as.matrix(usedcar_table[,c("Selling_Price","Present_Price","Miles_Driven")])
+cor(usedcar_matrix)
+
+#linear regression
+
