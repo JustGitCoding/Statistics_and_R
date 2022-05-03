@@ -87,3 +87,32 @@ ggplot(mtcars,aes(x=wt)) + geom_density()
 
 #quantitative test for normality -- p-value > 0.05 means data is considered normally distributed
 shapiro.test(mtcars$wt)
+
+#sampling
+#population
+usedcar_pop <- read.csv('used_car_data.csv',check.names=F, stringsAsFactors=F)
+plt <- ggplot(usedcar_pop,aes(x=log10(Miles_Driven)))
+plt + geom_density()
+#sample
+usedcar_sample <- usedcar_pop %>% sample_n(50)
+plt <- ggplot(usedcar_sample,aes(x=log10(Miles_Driven)))
+plt + geom_density()
+
+#one-sample t-test
+t.test(log10(usedcar_sample$Miles_Driven),mu=mean(log10(usedcar_pop$Miles_Driven)))
+
+#two-sample t-test
+usedcar_sample2 <- usedcar_pop %>% sample_n(50)
+t.test(log10(usedcar_sample$Miles_Driven),log10(usedcar_sample2$Miles_Driven))
+
+#paired t-test
+mpg_data <- read.csv('mpg_modified.csv')
+mpg_1999 <- mpg_data %>% filter(year==1999)
+mpg_2008 <- mpg_data %>% filter(year==2008)
+t.test(mpg_1999$hwy,mpg_2008$hwy,paired=T)
+
+#ANOVA - analysis of variance
+mtcars_filt <- mtcars[,c('hp','cyl')] #filter columns from data
+mtcars_filt$cyl <- factor(mtcars_filt$cyl) #convert numeric column to factor
+aov(hp ~ cyl, data=mtcars_filt) #compare means across multiple levels
+summary(aov(hp ~ cyl, data=mtcars_filt)) #summarize results of aov (Pr(>F) is our p-value)
