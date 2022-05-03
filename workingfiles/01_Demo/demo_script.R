@@ -81,3 +81,9 @@ head(mpg_long)
 plt <- ggplot(mpg_long, aes(x=manufacturer, y=Rating, color=MPG_Type))
 plt + geom_boxplot() + facet_wrap(vars(MPG_Type)) +
   theme(axis.text.x=element_text(angle=45, hjust=1), legend.position='none') +xlab("Manufacturer")
+
+#qualitative test for normality
+ggplot(mtcars,aes(x=wt)) + geom_density()
+
+#quantitative test for normality -- p-value > 0.05 means data is considered normally distributed
+shapiro.test(mtcars$wt)
