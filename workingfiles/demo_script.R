@@ -37,7 +37,7 @@ long_table <- gather(demo_table3,key="Metric",value="Score",buying_price:popular
 long_table <- demo_table3 %>% gather(key='Metric',value='Score',buying_price:popularity)
 wide_table <- long_table %>% spread(key='Metric',value='Score')
 wide_table <- wide_table[,(colnames(demo_table3))] # reorganize columns to match demo_table3
-all.equal(demo_table3,wide_table)
+all.equal(demo_table3,wide_table) # compare 2 tables
 
 # ggplot2 - using mpg data which is built into R
 plt <- ggplot(mpg,aes(x=class)) #import dataset into ggplot2
