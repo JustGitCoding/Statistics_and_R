@@ -31,6 +31,16 @@ When performing the t-test with all manufacturing lots combined, we observe a p-
 
 When we dig into the data and perform the t-test for each manufacturing lot however, we see a slightly different story. In Lot1, we have a p-value of 1 (max value), indicating that there is absolutely no difference between the sample mean and population mean (both are 1500). In Lot 2, the p-value is 0.61 (still much greater than 0.05) and again we fail to reject the null hypothesis that there is no statistical difference between the observed sample mean and its presumed population mean. Lot 3 however, tells us a different story. Here we see a p-value of 0.04 (< 0.05) which indicates that we should reject our null hypothesis, as there is a statistical difference betwen the observed sample mean (1496 PSI) and the population mean (1500 PSI).
 
+## Study Design: MechaCar vs the Competition
+In order to stand out against the competition, the AutosRUs team may also consider performing a statistical analysis of the safety rating of their MechaCar. One way to do this is to perform collision tests to determine the frequency of airbag malfunctions. 
+
+Our Null Hypothesis would be that the probability of airbag malfunctions = 0 (the alternative hypothesis being that the probability of airbag malfunctions is > 0).
+
+As our customers' lives would be at stake, we are more concerned with Type II errors (failing to reject the null hypothesis when it is actually false - i.e. that there is a probability (>0) that the MechaCar airbag will malfunction or fail to deploy). In order to mitigate this, it is recommended that a larger sample size is utilized. This may be costly to the Company (to repeatedly crash-test vehicles) but will increase the power of the statistical test. Another way to limit the risk of a Type II error, is to raise the level of significance (while 0.05 is most commonly used among statisticians, AutosRUs may consider using a higher level).
+
+The AutosRUs team would need to compile airbag malfunction rates from competing car companies, as well as generate this data for the MechCar (i.e. perform a large number of crash tests on the MechaCar, noting the number of times the airbag malfunctioned or failed to deploy). Once this data is compiled, AutosRUs could perform two separate tests:
+1. A simple one-sample t-test will reveal whether we must reject or fail to reject our null hypothesis (that the probability of MechaCar's airbag malfunctioning = 0). Failing to reject this hypothesis would be a great sign to potential buyers of the MechaCar.
+2. A Two-sample t-test would also be great to show buyers whether there is a statistical difference between the airbag failure rates of the MechaCar vs any competing car models (Our null hypothesis being that there is no statistical difference between the failure rate of the MechaCar's airbags and that of its competitors).
 
 ## Tools:
 - R with RStudio
