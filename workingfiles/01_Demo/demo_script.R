@@ -134,5 +134,19 @@ cor(usedcar_table$Miles_Driven, usedcar_table$Selling_Price)
 usedcar_matrix <- as.matrix(usedcar_table[,c("Selling_Price","Present_Price","Miles_Driven")])
 cor(usedcar_matrix)
 
-#linear regression
+#linear models (linear regression)
+#simple linear regression
+lm(qsec ~ hp,mtcars)
+summary(lm(qsec ~ hp,mtcars)) #summarize results of lm
+model <- lm(qsec ~ hp,mtcars)
+yvals <- model$coefficients['hp']*mtcars$hp + model$coefficients['(Intercept)'] #determine y-axis values from linear model
+plt <- ggplot(mtcars,aes(x=hp,y=qsec))
+plt + geom_point() + geom_line(aes(y=yvals), color='red')
 
+#multiple linear regression
+lm(qsec ~ mpg + disp + drat + wt + hp, data=mtcars)
+summary(lm(qsec ~ mpg + disp + drat + wt + hp, data=mtcars)) #summarize (Pr(>|t|) = individual p-values)
+
+#categorical data
+#chi-squared test
+table(mpg$class, mpg$year) #generate contingency table (calculates frequencies across factors)
