@@ -149,4 +149,5 @@ summary(lm(qsec ~ mpg + disp + drat + wt + hp, data=mtcars)) #summarize (Pr(>|t|
 
 #categorical data
 #chi-squared test
-table(mpg$class, mpg$year) #generate contingency table (calculates frequencies across factors)
+tbl <- table(mpg$class, mpg$year) #generate contingency table (calculates frequencies across factors)
+chisq.test(tbl) #compares categorical distributions
